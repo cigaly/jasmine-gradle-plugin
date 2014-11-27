@@ -29,6 +29,8 @@ class JasmineGeneratorTask extends DefaultTask {
 
     boolean defaultsInited = false;
 
+    def outfile;
+
     def initDefaults() {
         defaultsFactory.setProject(project);
         targetDir = new File( project.projectDir, defaultsFactory.generatorTargetDir );

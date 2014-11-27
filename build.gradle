@@ -11,7 +11,10 @@ buildscript {
 
 apply plugin: 'groovy'
 apply plugin: 'eclipse'
+/* TODO !!!!
 apply plugin: 'maven-oss'
+*/
+apply plugin: 'maven'
 
 group = 'com.github.dzhaughnroth'
 version = '0.5'
@@ -22,14 +25,16 @@ repositories {
 
 dependencies {
 	     compile "junit:junit:3.8.2"
+	/* TODO !!!!!
   groovy localGroovy()
-  compile "org.codehaus.groovy:groovy:1.7.8"
+	*/
+  compile "org.codehaus.groovy:groovy-all:2.3.7"
   compile gradleApi()
   compile "net.sourceforge.htmlunit:htmlunit:2.8"
 }
 
 afterEvaluate {
-        def prTasks = sourceSets.all.processResourcesTaskName.collect { tasks[it] };
+        def prTasks = sourceSets.collect { tasks[it.processResourcesTaskName] }
         prTasks.each( { it.configure( {
                         filter( ReplaceTokens, tokens: [version: project.version] )
         } )
@@ -123,6 +128,7 @@ def checkDir( dir, specsFailed, pagesFailed, pagesPassed, jslintFailed ) {
 check.dependsOn( pluginTestTask );
 check.dependsOn( pluginNotFailingTestTask );
 check.dependsOn( generatorTestTask );
+/* TODO !!!!!
 pomConfigurator.addDeveloper( "John Roth", "dzhaughnroth@sourceforge.net" )
 pomConfigurator.gnuLicense();
 pomConfigurator.configurePom( {
@@ -139,4 +145,4 @@ pomConfigurator.configurePom( {
        }
     }
 } } );
-
+*/

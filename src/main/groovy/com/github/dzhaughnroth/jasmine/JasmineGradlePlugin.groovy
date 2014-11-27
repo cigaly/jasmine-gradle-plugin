@@ -30,19 +30,19 @@ class JasmineGradlePlugin implements Plugin<Project> {
         def props = new Properties();
         props.load( JasmineGradlePlugin.class.getResourceAsStream( "jasmine-gradle.properties" ));
         def version = props["version"];
-        
-        p.configurations.add("jasmineGradlePlugin");
+
+        p.configurations.create("jasmineGradlePlugin");
         p.dependencies.add("jasmineGradlePlugin",
                 "com.github.dzhaughnroth:jasmine-gradle-plugin:${version}");
-        JasmineGeneratorTask jgentask = p.tasks.add( "jasmineGenerate",
+        JasmineGeneratorTask jgentask = p.tasks.create( "jasmineGenerate",
             JasmineGeneratorTask.class );
         jgentask.defaultsFactory = config;
 
-        JasmineCopyTask jcopytask = p.tasks.add("jasmineCopy",
+        JasmineCopyTask jcopytask = p.tasks.create("jasmineCopy",
                 JasmineCopyTask.class);
         jcopytask.defaultsFactory = config;
 
-        JasmineRunnerTask jrunnertask = p.tasks.add("jasmineRun",
+        JasmineRunnerTask jrunnertask = p.tasks.create("jasmineRun",
                 JasmineRunnerTask.class);
         jrunnertask.defaultsFactory = config;
         jrunnertask.dependsOn(jcopytask);

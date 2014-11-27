@@ -41,7 +41,7 @@ class JasmineRunnerTask extends DefaultTask {
 
     File parentDir;
     def runnerIncludes;
-    def runnerexcludes;
+    def runnerExcludes;
     boolean failBuildOnSpecFailure;
     boolean failBuildOnJslintFailure;
     def testIncludes;
@@ -50,8 +50,7 @@ class JasmineRunnerTask extends DefaultTask {
     @TaskAction
 	def findAndRunOnFiles() {
 		if ( ! defaultsInited ) { initDefaults() };				
-		def tree = project.fileTree {
-		    	from parentDir
+		def tree = project.fileTree(parentDir) {
 			include testIncludes
 			exclude testExcludes
 		}
